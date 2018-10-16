@@ -1,0 +1,6 @@
+flask
+connexion
+nose
+jenkinsapi
+requests
+simplejson
