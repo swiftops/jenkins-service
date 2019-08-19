@@ -1,12 +1,9 @@
 from flask import Flask
-import jenkinsapi
 from jenkinsapi.jenkins import Jenkins
 from jenkinsapi.utils.crumb_requester import CrumbRequester
-from jenkinsapi.job import *
 from flask import request
 import logging
 import configparser
-import threading
 from threading import Thread
 
 logging.basicConfig(level=logging.DEBUG)
@@ -34,7 +31,7 @@ def postUrl(jobname, parameter):
     crumb = CrumbRequester(username=jenkins_username, password=jenkins_token, baseurl=jenkins_url)
     logging.debug("Jobname " + jobname)
     logging.debug("Parameter List " + json.dumps(parameter))
-    jenkins = jenkinsapi.jenkins.Jenkins(jenkins_url, username=jenkins_username,
+    jenkins = Jenkins(jenkins_url, username=jenkins_username,
                                          password=jenkins_token, requester=crumb, timeout=30)
     jenkins.build_job(jobname, parameter)
 
